@@ -19,12 +19,13 @@ import org.glassfish.embeddable.GlassFishRuntime;
  */
 public class EmbeddedMain {
     private static Connection con;
+    private static GlassFish glassFish;
 
     public static void main(String[] args) throws GlassFishException, Exception {
         GlassFishProperties glassFishProperties = new GlassFishProperties();
         glassFishProperties.setPort("http-listener", 8080);
 
-        final GlassFish glassFish = GlassFishRuntime.bootstrap().newGlassFish(glassFishProperties);
+        glassFish = GlassFishRuntime.bootstrap().newGlassFish(glassFishProperties);
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             @Override
@@ -58,6 +59,9 @@ public class EmbeddedMain {
         //デプロイ
         Deployer deployer = glassFish.getDeployer();
         System.out.println(deployer.deploy(new File(args[0]), "--name=embedded", "--contextroot=", "--force=true"));
+    }
+    public static void shutdown(String[] args){
+        Runtime.getRuntime().halt(0);
     }
 
     /**

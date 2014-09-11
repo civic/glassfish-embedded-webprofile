@@ -29,6 +29,10 @@
             <fileMode>744</fileMode>
         </fileSet>
 
+        <fileSet>
+            <directory>src/main/procrun</directory>
+            <outputDirectory>/bin</outputDirectory>
+        </fileSet>
     </fileSets>
     
 
